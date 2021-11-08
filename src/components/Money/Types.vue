@@ -14,6 +14,41 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';  // 装饰器
+
+@Component({
+  props: {
+    propMessage: String
+  }
+})
+
+export default class Types extends Vue { // 把装饰器修饰到class上面
+  // 会自动处理成 内部属性 data
+  type = '-'; // '-'表示支出，'+'表示收入
+  helloMsg = 'Hello, ' + this.propMessage;
+
+  //   会自动处理成 方法 methods
+  selectType(type: string) { // type 只能是 '-' 和 '+' 中的一个
+    if (type !== '-' && type !== '+') {
+      throw new Error('type is unknown');
+    }
+    this.type = type;
+  }
+
+
+  // 生命周期
+  created() {}
+
+  mounted() {}
+
+}
+
+</script>
+
+<!--
+
 <script>
 export default {
   name: 'Types',
@@ -36,6 +71,10 @@ export default {
   }
 }
 </script>
+
+-->
+
+
 
 <style lang="scss" scoped>
 .types {

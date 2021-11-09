@@ -1,12 +1,9 @@
 <template>
   <div>
     <ul class="types">
-      <!--      完整写法-->
-      <li :class="type === '-' ?  'selected' :''"
+      <li :class="type === '-' && 'selected'"
           @click="selectType('-')">支出
       </li>
-
-      <!--      vue智能化后的简写-->
       <li :class="type === '+' && 'selected'"
           @click="selectType('+')">收入
       </li>
@@ -16,65 +13,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';  // 装饰器
+import {Component, Prop} from 'vue-property-decorator';
 
-@Component({
-  props: {
-    propMessage: String
-  }
-})
-
-export default class Types extends Vue { // 把装饰器修饰到class上面
-  // 会自动处理成 内部属性 data
+@Component
+export default class Types extends Vue {
   type = '-'; // '-'表示支出，'+'表示收入
-  helloMsg = 'Hello, ' + this.propMessage;
-
-  //   会自动处理成 方法 methods
-  selectType(type: string) { // type 只能是 '-' 和 '+' 中的一个
+  selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     }
     this.type = type;
   }
-
-
-  // 生命周期
-  created() {}
-
-  mounted() {}
-
-}
-
-</script>
-
-<!--
-
-<script>
-export default {
-  name: 'Types',
-  props: ['xxx'],  // 外部属性
-  data() {   // 内部属性
-    return {
-      type: '-' // '-'表示支出，'+'表示收入
-    }
-  },
-  mounted() {  // 生命周期
-    console.log(this.xxx)
-  },
-  methods: {   // 方法
-    selectType(type) { // type 只能是 '-' 和 '+' 中的一个
-      if (type !== '-' && type !== '+') {
-        throw new Error('type is unknown')
-      }
-      this.type = type
-    }
-  }
 }
 </script>
-
--->
-
-
 
 <style lang="scss" scoped>
 .types {
@@ -82,7 +33,6 @@ export default {
   display: flex;
   text-align: center;
   font-size: 24px;
-
   > li {
     width: 50%;
     height: 64px;
@@ -90,7 +40,6 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
-
     &.selected::after {
       content: '';
       position: absolute;

@@ -1,14 +1,12 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
-      <!--          :class="selectedTags.indexOf(tag)>=0 && 'selected' "-->
-      @click="toggle(tag)">
-      {{ tag }}
+          @click="toggle(tag)">{{tag}}
       </li>
     </ul>
   </div>
@@ -19,10 +17,9 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 
-@Component //外面的，没有参数的，可以省略括号
+@Component
 export default class Tags extends Vue {
-  @Prop() dataSource: string[] | undefined; // @Prop(Array) 因为这里的功能比较弱，这里只能写全局的构造函数
-  //里面的，必须有括号   @Prop()
+  @Prop() readonly dataSource: string[] | undefined;
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -32,6 +29,18 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.push(tag);
     }
+  }
+
+  create() {
+    const name = window.prompt('请输入标签名');
+
+    if (name === '') {
+      window.alert('标签名不能为空');
+    } else if (this.dataSource) {
+      this.$emit('update:dataSource', //把dataSource更新的请求，告诉给外部，外部接受这个事件
+          [...this.dataSource, name]);
+    }
+
   }
 }
 </script>
@@ -43,11 +52,9 @@ export default class Tags extends Vue {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-
   > .current {
     display: flex;
     flex-wrap: wrap;
-
     > li {
       $bg: #d9d9d9;
       background: $bg;
@@ -58,17 +65,14 @@ export default class Tags extends Vue {
       padding: 0 16px;
       margin-right: 12px;
       margin-top: 4px;
-
       &.selected {
         background: darken($bg, 50%);
         color: white;
       }
     }
   }
-
   > .new {
     padding-top: 16px;
-
     button {
       background: transparent;
       border: none;

@@ -3,7 +3,8 @@
     <NumberPad/>
     <Types/>
     <Notes/>
-    <Tags :data-source="tags"/>
+    <Tags :data-source.sync="tags"/>
+    <!--    .sync意思：如果触发了'update:dataSource'事件，就会把传的数组，赋值给它之前的data-source【这】-->
   </Layout>
 </template>
 

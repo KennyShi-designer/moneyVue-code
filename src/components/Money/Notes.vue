@@ -1,9 +1,19 @@
 <template>
   <div>
+    {{value}} //一种log技巧
     <label class="notes">
       <span class="name">备注</span>
-      <input type="text" :value="value"
-             @input="onInput"
+
+      <!--      <input type="text"-->
+
+      <!--             :value="x"-->
+      <!--             @input="x = $event.target.value"-->
+      <!--      /*-->
+      <!--      这两句话，简写成  v-model="x"-->
+      <!--      */-->
+
+      <input type="text"
+             v-model="value"
              placeholder="在这里输入备注">
     </label>
   </div>
@@ -31,9 +41,11 @@ export default class Notes extends Vue {
   padding-left: 16px;
   display: flex;
   align-items: center;
+
   .name {
     padding-right: 16px;
   }
+
   input {
     height: 64px;
     flex-grow: 1;

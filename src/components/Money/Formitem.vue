@@ -1,8 +1,7 @@
 <template>
   <div>
-    {{value}} //一种log技巧
     <label class="notes">
-      <span class="name">备注</span>
+      <span class="name">{{ this.fieldName }}</span>
 
       <!--      <input type="text"-->
 
@@ -13,23 +12,30 @@
       <!--      */-->
 
       <input type="text"
-             v-model="value"
-             placeholder="在这里输入备注">
+             :value="value"
+             @input="onValueChanged($event.target.value)"
+             :placeholder="this.placeholder">
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component
-export default class Notes extends Vue {
-  value = '';
+export default class FormItem extends Vue {
+  @Prop({default: ''}) readonly value!: string;
 
-  onInput(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
+  @Prop({required: true}) fieldName!: string
+  @Prop() placeholder?: string
+
+
+  @Watch('value')
+  onValueChanged(value: string) {
+    // const input = event.target as HTMLInputElement;
+    // this.value = input.value;
+    this.$emit('update:value', value)
   }
 }
 </script>
@@ -47,7 +53,7 @@ export default class Notes extends Vue {
   }
 
   input {
-    height: 64px;
+    height: 40px;
     flex-grow: 1;
     background: transparent;
     border: none;

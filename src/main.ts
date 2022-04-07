@@ -11,12 +11,14 @@ import Icon from '@/components/Icon.vue';
 
 Vue.config.productionTip = false
 
-Vue.component('Nav',Nav)
-Vue.component('Layout',Layout)
-Vue.component('Icon',Icon)
+Vue.component('Nav', Nav)
+Vue.component('Layout', Layout)
+Vue.component('Icon', Icon)
+
+
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

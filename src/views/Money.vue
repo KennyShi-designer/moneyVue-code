@@ -1,27 +1,57 @@
 <template>
   <Layout class-prefix="layout">
-    <NumberPad/>
-    <Types/>
-    <Notes/>
-    <Tags :data-source.sync="tags"/>
+    {{ recordList }}
+    <!--    <NumberPad :value='record.amount' @update:value="onUpdateAmount"/>-->
+    <NumberPad :value.sync='record.amount' @submit="saveRecord"/>
+
+    <!--    <Types :value='record.type' @update:value="onUpdateTypes"/>-->
+    <Types :value.sync='record.type'/>
+    <div class="notes">
+      <FormItem field-name="备注" placeholder="在这里输入备注"
+                @update.value="onUpdateNotes"/>
+    </div>
+
+    <Tags/>
     <!--    .sync意思：如果触发了'update:dataSource'事件，就会把传的数组，赋值给它之前的data-source【这】-->
+    {{ count }}<button @click="$store.commit('increment',1)">+1</button>
   </Layout>
 </template>
 
-<script>
+<script lang="ts">
 import NumberPad from '@/components/Money/NumberPad.vue'
 import Types from '@/components/Money/Types.vue'
-import Notes from '@/components/Money/Notes.vue'
+import FormItem from '@/components/Money/Formitem.vue'
 import Tags from '@/components/Money/Tags.vue'
+import Vue from 'vue'
+import {Component, Watch} from "vue-property-decorator";
+import {oldStore} from "@/store/index2";
+import store from "@/store";
 
-export default {
-  name: 'Money',
-  components: {Tags, Notes, Types, NumberPad},
-  data() {
-    return {
-      tags: ['衣', '食', '住', '行', '彩票']
+
+@Component({
+  components: {Tags, FormItem, Types, NumberPad},
+  computed: {
+    count() {
+      return store.state.count
+    },
+    recordList() {
+      return oldStore.recordList
     }
   }
+})
+export default class Money extends Vue {
+  record: RecordItem = {tag: [], notes: '', type: '-', amount: 0}
+
+
+  onUpdateNotes(value: string) {
+    this.record.notes = value
+  }
+
+  saveRecord() {
+    oldStore.createRecord(this.record)
+  }
+
+
 }
 </script>
 
@@ -29,6 +59,10 @@ export default {
 .layout-content {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.notes {
+  padding: 8px 0;
 }
 </style>
 

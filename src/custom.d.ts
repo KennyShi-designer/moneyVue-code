@@ -18,8 +18,3 @@ type TagListModel = {
     remove: (id: string) => boolean
     save: () => void
 }
-
-interface Window {
-
-
-}

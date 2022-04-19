@@ -40,10 +40,6 @@ const store = new Vuex.Store({
 
 
 
-
-
-
-
         fetchTags(state) {
             return state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
         },

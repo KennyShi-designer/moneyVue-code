@@ -5,11 +5,11 @@
     <NumberPad :value.sync='record.amount' @submit="saveRecord"/>
 
     <!--    <Types :value='record.type' @update:value="onUpdateTypes"/>-->
-<!--    <Types :value.sync='record.type'/>-->
+    <!--    <Types :value.sync='record.type'/>-->
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
       <For mItem field-name="备注" placeholder="在这里输入备注"
-                @update.value="onUpdateNotes"/>
+           @update.value="onUpdateNotes"/>
     </div>
 
     <Tags/>

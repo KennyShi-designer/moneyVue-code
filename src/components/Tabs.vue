@@ -2,8 +2,12 @@
   <ul class="tabs" :class="{[classPrefix +'-tabs']:classPrefix}">
 
     <li v-for="item in dataSource" :key="item.value"
-        class="tabs-item" :class="liClass(item)"8
+        class="tabs-item" :class="liClass(item)"
         @click="select(item)">{{ item.text }}
+      <!--      js控制css-->
+      <!--    <li v-for="item in dataSource" :key="item.value"-->
+      <!--        class="tabs-item" :class="liClass(item)" :style="{height:height+ 'px'}"-->
+      <!--        @click="select(item)">{{ item.text }}-->
     </li>
     <!--        :class="{[classPrefix+'-tabs-item']:classPrefix,selected:item.value === value}"-->
   </ul>
@@ -22,6 +26,9 @@ export default class Tabs extends Vue {
 
   // css类前缀
   @Prop(String) classPrefix?: string
+
+  // // js控制css
+  // @Prop({type:String,default:'64px'}) height!: string
 
 
   liClass(item: DataSourceItem) {

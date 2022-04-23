@@ -8,14 +8,14 @@
     <!--    <Types :value.sync='record.type'/>-->
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
-      <For mItem field-name="备注" placeholder="在这里输入备注"
-           @update.value="onUpdateNotes"/>
+      <FormItem field-name="备注" placeholder="在这里输入备注"
+                @update.value="onUpdateNotes"/>
     </div>
 
     <Tags/>
     <!--    .sync意思：如果触发了'update:dataSource'事件，就会把传的数组，赋值给它之前的data-source【这】-->
-    {{ count }}
-    <button @click="$store.commit('increment',1)">+1</button>
+    <!--    {{ count }}-->
+    <!--    <button @click="$store.commit('increment',1)">+1</button>-->
   </Layout>
 </template>
 

@@ -10,6 +10,18 @@
       <br/>
       interval:{{ interval }}
     </div>
+    <div>
+      <ol>
+        <li v-for="(group,index) in result" :key="index">
+          <h3>{{group.title}}</h3>
+          <ol>
+            <li v-for="item in group.items" :key="item.id">
+              {{ item.amount }} {{ item.createAt }}
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
   </Layout>
 </template>
 
@@ -24,6 +36,39 @@ import recordTypeList from "@/constants/recordTypeList";
   components: {Tabs}
 })
 export default class Statistics extends Vue {
+  get recordList() {
+    return (this.$store.state as RootState).recordList
+  }
+
+
+  get result() {
+    const {recordList} = this
+
+    // 声明一个空对象的类型
+    type HashTableValue = { title: string, items: RecordList[] }
+    const hashTable: { [key: string]: HashTableValue} = {}
+
+    for (let i = 0; i < recordList.length; i++) {
+      const [date, time] = recordList[i].createAt!.split('T')
+      console.log(date)
+
+      hashTable[date] = hashTable[date] || {title: date, items: []}
+      hashTable[date].items.push(recordList[i])
+    }
+
+    console.log(hashTable)
+    return hashTable
+  }
+
+
+  // mounted() {
+  //   this.$store.commit('fetchRecords')
+  // }
+
+  beforeCreate() {
+    this.$store.commit('fetchRecords')
+  }
+
   type = '-';
   interval = 'day'
 

@@ -37,9 +37,15 @@ export default class Tabs extends Vue {
     }
   }
 
+  // 放在原型上
   select(item: DataSourceItem) {
     this.$emit('update:value', item.value)
   }
+
+  // // 放在对象本身上
+  // select=(item: DataSourceItem) =>{
+  //   this.$emit('update:value', item.value)
+  // }
 }
 </script>
 

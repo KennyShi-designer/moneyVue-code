@@ -1,21 +1,26 @@
 <template>
   <Layout class-prefix="layout">
-    {{ recordList }}
+    <!--    {{ recordList }}-->
+
     <!--    <NumberPad :value='record.amount' @update:value="onUpdateAmount"/>-->
     <NumberPad :value.sync='record.amount' @submit="saveRecord"/>
+
+
+    <!--    .sync意思：如果触发了'update:dataSource'事件，就会把传的数组，赋值给它之前的data-source【这】-->
+    <!--    {{ count }}-->
+    <!--    <button @click="$store.commit('increment',1)">+1</button>-->
+
 
     <!--    <Types :value='record.type' @update:value="onUpdateTypes"/>-->
     <!--    <Types :value.sync='record.type'/>-->
     <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
+
+
     <div class="notes">
       <FormItem field-name="备注" placeholder="在这里输入备注"
                 @update.value="onUpdateNotes"/>
     </div>
-
     <Tags/>
-    <!--    .sync意思：如果触发了'update:dataSource'事件，就会把传的数组，赋值给它之前的data-source【这】-->
-    <!--    {{ count }}-->
-    <!--    <button @click="$store.commit('increment',1)">+1</button>-->
   </Layout>
 </template>
 
@@ -35,11 +40,11 @@ import recordTypeList from "@/constants/recordTypeList";
   components: {Tabs, Tags, FormItem, NumberPad},
 })
 export default class Money extends Vue {
-  record: RecordItem = {tag: [], notes: '', type: '-', amount: 0}
-
   get recordList() {
     return this.$store.state.recordList
   }
+
+  record: RecordItem = {tag: [], notes: '', type: '-', amount: 0}
 
   recordTypeList = recordTypeList
 
@@ -53,14 +58,15 @@ export default class Money extends Vue {
 
   saveRecord() {
     this.$store.commit('createRecord', this.record)
+    console.log(this.record)
   }
 
 
 }
 </script>
 
-<style lang="scss">
-.layout-content {
+<style lang="scss" scoped>
+::v-deep .layout-content {
   display: flex;
   flex-direction: column-reverse;
 }

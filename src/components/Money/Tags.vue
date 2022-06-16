@@ -4,7 +4,7 @@
       <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in tags" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
@@ -21,9 +21,10 @@ import {TagHelper} from "@/mixins/TagHelper";
 
 
 @Component
-export default class Tags extends mixins(TagHelper)  {
+export default class Tags extends mixins(TagHelper) {
   selectedTags: string[] = [];
-  get tags() {
+
+  get tagList() {
     return this.$store.state.tagList
   }
 
@@ -40,6 +41,10 @@ export default class Tags extends mixins(TagHelper)  {
   created() {
     this.$store.commit('fetchTags')
   }
+
+  // create() {
+  //   this.$store.commit('createTag', name)
+  // }
 
 
 }

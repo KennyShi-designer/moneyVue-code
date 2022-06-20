@@ -10,6 +10,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         recordList: [],
+        createRecordError:null,
+        createTagError:null,
         tagList: [],
         currentTag: undefined
     } as RootState,
@@ -36,6 +38,7 @@ const store = new Vuex.Store({
 
         fetchTags(state) {
             return state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
+
         },
         createTag(state, name: string) {
             const names = state.tagList.map(item => item.name)

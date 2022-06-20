@@ -129,7 +129,9 @@ export default class Statistics extends Vue {
     // console.log(newList.map(i => i.createAt))
 
     type Result = { title: string, total?: number, items: RecordItem[] }[]
-    const result: Result = [{title: dayjs(recordList[0].createAt).format('YYYY-MM-DD'), items: [recordList[0]]}]
+
+    const result: Result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}]
+
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i]
       const last = result[result.length - 1]
@@ -139,7 +141,9 @@ export default class Statistics extends Vue {
         result.push({title: dayjs(current.createAt).format('YYYY-MM-DD'), items: [current]})
       }
     }
-    console.log(result)
+
+    // console.log(result)
+
     result.map(group => {
       group.total = group.items.reduce((sum, item) => sum + item.amount, 0)
     })

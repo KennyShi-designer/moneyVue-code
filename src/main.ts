@@ -7,6 +7,8 @@ import store from './store'
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
+import './assets/icons/iconfont.css'
+import './assets/icons/iconfont'
 
 
 Vue.config.productionTip = false

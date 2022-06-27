@@ -7,11 +7,11 @@ import router from "@/router";
 Vue.use(Vuex)
 
 
-const store = new Vuex.Store({
+const store:any= new Vuex.Store({
     state: {
         recordList: [],
-        createRecordError:null,
-        createTagError:null,
+        createRecordError: null,
+        createTagError: null,
         tagList: [],
         currentTag: undefined
     } as RootState,
@@ -20,36 +20,6 @@ const store = new Vuex.Store({
     mutations: {
         setCurrentTag(state, id: string) {
             state.currentTag = state.tagList.filter(t => t.id === id)[0]
-        },
-        fetchRecords(state) {
-            state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[]
-        },
-        createRecord(state, record: RecordItem) {
-            const deepClone: RecordItem = clone(record)
-            deepClone.createAt = new Date().toISOString()
-            state.recordList.push(deepClone)
-            store.commit('saveRecords')
-        },
-        saveRecords(state) {
-            window.localStorage.setItem('recordList', JSON.stringify(state.recordList))
-        },
-
-
-
-        fetchTags(state) {
-            return state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
-
-        },
-        createTag(state, name: string) {
-            const names = state.tagList.map(item => item.name)
-            if (names.indexOf(name) >= 0) {
-                window.alert('标签名重复了')
-            }
-            const id = createId().toString()
-            state.tagList.push({id: id, name: name})
-            store.commit('saveTags')
-            window.alert('添加成功')
-
         },
         updateTag(state, payload: { id: string, name: string }) {
             const {id, name} = payload
@@ -80,6 +50,36 @@ const store = new Vuex.Store({
             } else {
                 window.alert('标签删除失败')
             }
+        },
+        fetchRecords(state) {
+            state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[]
+        },
+        createRecord(state, record: RecordItem) {
+            const deepClone = clone(record)
+            deepClone.createAt = new Date().toISOString()
+            state.recordList.push(deepClone)
+            store.commit('saveRecords')
+        },
+        saveRecords(state) {
+            window.localStorage.setItem('recordList', JSON.stringify(state.recordList))
+        },
+        fetchTags(state) {
+            state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
+            if (!state.tagList || state.tagList.length === 0) {
+                // const beforeTagList: string[] = ['衣服', '餐饮', '日用','交通','医疗','房贷','购物','汽车','宠物','运动']
+                // return beforeTagList.map(t => store.commit('createTag', t))
+            }
+        },
+        createTag(state, name: string) {
+            state.createTagError = null
+            const names = state.tagList.map(item => item.name)
+            if (names.indexOf(name) >= 0) {
+                return
+            }
+            const id = createId().toString()
+            state.tagList.push({id, name: name})
+            store.commit('saveTags')
+
         },
         saveTags(state) {
             window.localStorage.setItem('tagList', JSON.stringify(state.tagList))

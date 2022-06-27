@@ -1,0 +1,100 @@
+{
+  "id": "2205623",
+  "name": "money",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "29797323",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "100d6",
+      "unicode_decimal": 65750
+    },
+    {
+      "icon_id": "29797296",
+      "name": "减少",
+      "font_class": "jianshao",
+      "unicode": "100d4",
+      "unicode_decimal": 65748
+    },
+    {
+      "icon_id": "29797297",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "100d5",
+      "unicode_decimal": 65749
+    },
+    {
+      "icon_id": "29797307",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "100d3",
+      "unicode_decimal": 65747
+    },
+    {
+      "icon_id": "687392",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e6ff",
+      "unicode_decimal": 59135
+    },
+    {
+      "icon_id": "29797328",
+      "name": "信用卡",
+      "font_class": "xinyongka",
+      "unicode": "100d0",
+      "unicode_decimal": 65744
+    },
+    {
+      "icon_id": "29797334",
+      "name": "编辑",
+      "font_class": "bianji",
+      "unicode": "100d1",
+      "unicode_decimal": 65745
+    },
+    {
+      "icon_id": "29797337",
+      "name": "添加",
+      "font_class": "tianjia",
+      "unicode": "100d2",
+      "unicode_decimal": 65746
+    },
+    {
+      "icon_id": "29797299",
+      "name": "概率",
+      "font_class": "gaishuai",
+      "unicode": "100cb",
+      "unicode_decimal": 65739
+    },
+    {
+      "icon_id": "29797308",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "100cc",
+      "unicode_decimal": 65740
+    },
+    {
+      "icon_id": "29797319",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "100cd",
+      "unicode_decimal": 65741
+    },
+    {
+      "icon_id": "29797327",
+      "name": "余额",
+      "font_class": "yue1",
+      "unicode": "100ce",
+      "unicode_decimal": 65742
+    },
+    {
+      "icon_id": "29797331",
+      "name": "标签",
+      "font_class": "biaoqian2",
+      "unicode": "100cf",
+      "unicode_decimal": 65743
+    }
+  ]
+}

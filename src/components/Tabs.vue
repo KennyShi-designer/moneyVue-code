@@ -11,20 +11,23 @@
     </li>
     <!--        :class="{[classPrefix+'-tabs-item']:classPrefix,selected:item.value === value}"-->
   </ul>
+
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
 
+
 type DataSourceItem = { text: string, value: string }
 
 @Component
 export default class Tabs extends Vue {
   @Prop({required: true, type: Array}) dataSource!: DataSourceItem[]
+  // value表示选中的那一项
   @Prop(String) readonly value!: string
 
-  // css类前缀
+  // classPrefix表示css类前缀
   @Prop(String) classPrefix?: string
 
   // // js控制css
@@ -36,6 +39,7 @@ export default class Tabs extends Vue {
       [this.classPrefix + '-tabs-item']: this.classPrefix, selected: item.value === this.value
     }
   }
+
 
   // 放在原型上
   select(item: DataSourceItem) {
@@ -50,8 +54,10 @@ export default class Tabs extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+
 .tabs {
-  background: #c4c4c4;
+  //background:$mainColor;
   display: flex;
   text-align: center;
   font-size: 24px;
@@ -67,11 +73,12 @@ export default class Tabs extends Vue {
     &.selected::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: 2px;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: #333;
+      height: 6px;
+      border-radius: 50%;
+      background: $mainColor;
     }
   }
 }

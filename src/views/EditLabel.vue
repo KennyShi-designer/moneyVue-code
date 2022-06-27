@@ -1,8 +1,11 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left" @click="goBack"/>
-      <span class="title">编辑标签</span>
+      <Icon class="leftIcon" name="iconfanhui" @click="goBack"/>
+      <div class="title">
+        <Icon name="iconbianji"/>
+        <span>编辑标签</span>
+      </div>
       <span class="rightIcon"/>
     </div>
     <div class="form-wrapper">
@@ -10,7 +13,7 @@
                 field-name="标签名" placeholder="请输入标签名："/>
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Icon name="iconshanchu" @click="remove"/>
     </div>
 
   </Layout>
@@ -34,7 +37,6 @@ export default class EditLabel extends Vue {
 
   created() {
     const id = this.$route.params.id
-    console.log(id)
     this.$store.commit('fetchTags')
     this.$store.commit('setCurrentTag',id)
     // this.tag = this.$store.commit('fetchTags',this.$route.params.id)
@@ -63,13 +65,16 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+
 .navBar {
   text-align: center;
   font-size: 16px;
   padding: 12px 16px;
   display: flex;
   align-items: center;
-  background: white;
+
+  border-radius: 14px;
   justify-content: space-between;
 
   > .leftIcon {
@@ -85,13 +90,19 @@ export default class EditLabel extends Vue {
 }
 
 .form-wrapper {
-  background: white;
   margin-top: 8px;
+  ::v-deep .formItem {
+    background: $thirdColor;
+  }
 }
 
 .button-wrapper {
   text-align: center;
   padding: 16px;
   margin-top: 28px;
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

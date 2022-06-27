@@ -1,14 +1,19 @@
 <template>
   <Layout>
+    <div class="navBar">
+      <Icon name="iconbianji"/>
+      <span>标签</span>
+    </div>
     <div class="tags">
       <router-link class="tag" v-for="tag in tags" key="tag.id"
                    :to='`/labels/edit/${tag.id}`'>
+        <Icon name="iconbiaoqian2"/>
         <span>{{ tag.name }}</span>
-        <Icon name="right"/>
+
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <Icon name="icontianjia" class="createTag" @click="createTag"/>
     </div>
   </Layout>
 </template>
@@ -17,44 +22,50 @@
 
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import Button from "@/components/Button.vue";
 import {mixins} from "vue-class-component";
 import {TagHelper} from "@/mixins/TagHelper";
 
 
 
-@Component({
-  components: {Button},
-})
+@Component
 export default class Labels extends  mixins(TagHelper) {
-  beforeCreate() {
-    this.$store.commit('fetchTags')
-  }
   get tags() {
     return this.$store.state.tagList
+  }
+
+  beforeCreate() {
+    this.$store.commit('fetchTags')
   }
 
 };
 </script>
 
 <style lang="scss" scoped>
-.tags {
-  background: white;
+.navBar {
+  text-align: center;
   font-size: 16px;
-  padding-left: 16px;
+  padding: 12px 16px;
+}
+.tags {
+  font-size: 16px;
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+
 
   > .tag {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #e6e6e6;
+    border-radius: 68px;
+    background: white;
+    overflow: hidden;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
 
-    svg {
-      width: 18px;
-      height: 18px;
-      color: #666;
-      margin-right: 16px;
+    .icon {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      top: 1px;
     }
   }
 }
@@ -63,5 +74,9 @@ export default class Labels extends  mixins(TagHelper) {
   text-align: center;
   padding: 16px;
   margin-top: 28px;
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

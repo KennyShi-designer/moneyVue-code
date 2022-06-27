@@ -66,8 +66,8 @@ const store:any= new Vuex.Store({
         fetchTags(state) {
             state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
             if (!state.tagList || state.tagList.length === 0) {
-                // const beforeTagList: string[] = ['衣服', '餐饮', '日用','交通','医疗','房贷','购物','汽车','宠物','运动']
-                // return beforeTagList.map(t => store.commit('createTag', t))
+                const beforeTagList: string[] = ['衣服', '餐饮', '日用','交通','医疗','房贷','购物','汽车','宠物','运动']
+                return beforeTagList.map(t => store.commit('createTag', t))
             }
         },
         createTag(state, name: string) {
